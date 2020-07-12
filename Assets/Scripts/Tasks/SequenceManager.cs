@@ -27,14 +27,15 @@ public class SequenceManager : MonoBehaviour
 {
 
 
-  public int maxTaskSize = 15;
-  public int maxHistorySize = 10;
+  public int maxTaskSize = 250;
+  public int maxHistorySize = 5;
 
   public List<Task> taskList;
   public List<ButtonHistory> buttonHistory;
   public bool requiresValidation;
   public TaskGenerator taskGenerator;
   public ViewportHandler viewportHandler;
+  public ShopManager shopManager;
 
   // Start is called before the first frame update
   void Start()
@@ -50,7 +51,7 @@ public class SequenceManager : MonoBehaviour
   {
     if (requiresValidation)
     {
-      evaluteAllTasks();
+      evaluateCurrentTask();
       requiresValidation = false;
       updateTaskList();
     }
@@ -63,18 +64,35 @@ public class SequenceManager : MonoBehaviour
       return;
     }
 
-    Debug.Log("Generate a task");
     if (currentPhase == Phase.One)
     {
-      Debug.Log("Generate Phase ONe Task");
       taskList.Add(taskGenerator.generatePhaseOneTask(Time.time));
-      updateTaskList();
     }
-    //taskList.Insert(0, new SingleTask(ButtonPressed.blueCircle, Time.time));
+    else if (currentPhase == Phase.Two)
+    {
+      taskList.Add(taskGenerator.generatePhaseTwoTask(Time.time));
+    }
+    else
+    {
+      taskList.Add(taskGenerator.generatePhaseThreeTask(Time.time));
+
+    }
+    updateTaskList();
+  }
+
+  public void evaluateCurrentTask()
+  {
+    if (taskList.Count != 0 && taskList[0].evaluate(buttonHistory, Time.time))
+    {
+      int score = taskList[0].score();
+      shopManager.addItemToShop(score);
+      taskList.RemoveAt(0);
+    }
 
   }
 
-  public void evaluteAllTasks()
+  //don't plan on using this, evaluating all the tasks was too complex
+  public void evaluateAllTasks()
   {
     List<Task> updatedTaskList = new List<Task>();
     foreach (Task task in taskList)

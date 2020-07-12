@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /**
-  Manages input
+  Manages input. I would rename it, but it's not worth the hastle during a game jam
 */
 public class GameDriver : MonoBehaviour
 {

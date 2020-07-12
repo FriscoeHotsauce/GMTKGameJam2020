@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Phase
 {
-  Pre, One, Two, Three, Intermission, End
+  Preparation, One, Two, Three, Intermission, End
 }
 
 public class PhaseManager : MonoBehaviour
@@ -26,13 +28,18 @@ public class PhaseManager : MonoBehaviour
   public Phase currentPhase;
   public Phase nextPhase;
 
+  public Text currentPhaseText;
+  public Text timeRemainingText;
+
   private SequenceManager sequenceManager;
+  private ShopManager shopManager;
 
   // Start is called before the first frame update
   void Start()
   {
     sequenceManager = GameObject.FindGameObjectWithTag("SequenceManager").GetComponent<SequenceManager>();
-    currentPhase = Phase.Pre;
+    shopManager = GameObject.FindGameObjectWithTag("ShopManager").GetComponent<ShopManager>();
+    currentPhase = Phase.Preparation;
     nextPhase = Phase.One;
     nextPhaseBeginsAt = 0.0f;
     phaseEndsAt = 0.0f;
@@ -43,7 +50,7 @@ public class PhaseManager : MonoBehaviour
   {
     evaluatePhaseChange();
     evaluateTasks();
-
+    updatePhaseText();
   }
 
   private void evaluateTasks()
@@ -77,7 +84,7 @@ public class PhaseManager : MonoBehaviour
   private void evaluatePhaseChange()
   {
     //the preparation phase ends when the current list of tasks has been completed
-    if (Phase.Pre == currentPhase)
+    if (Phase.Preparation == currentPhase)
     {
       evaluatePreperationOver();
     }
@@ -105,6 +112,7 @@ public class PhaseManager : MonoBehaviour
     {
       currentPhase = nextPhase;
       nextPhase = getNextPhase();
+      shopManager.resumePurchases();
     }
   }
 
@@ -128,6 +136,8 @@ public class PhaseManager : MonoBehaviour
   {
     currentPhase = Phase.Intermission;
     nextPhaseBeginsAt = Time.time + phaseCooldownLength;
+    sequenceManager.clearAllTasks();
+    shopManager.pausePurchases();
   }
 
   private Phase getNextPhase()
@@ -150,5 +160,23 @@ public class PhaseManager : MonoBehaviour
       phaseEndsAt = Time.time + phaseThreeLength;
       return Phase.End;
     }
+  }
+
+  private void updatePhaseText()
+  {
+    currentPhaseText.text = currentPhase.ToString();
+    if (currentPhase == Phase.Preparation || currentPhase == Phase.End)
+    {
+      timeRemainingText.text = "- - : - -";
+    }
+    else if (currentPhase == Phase.Intermission)
+    {
+      timeRemainingText.text = (String.Format("{0:.00}", Math.Round(nextPhaseBeginsAt - Time.time, 2)));
+    }
+    else
+    {
+      timeRemainingText.text = (String.Format("{0:.00}", Math.Round(phaseEndsAt - Time.time, 2)));
+    }
+
   }
 }

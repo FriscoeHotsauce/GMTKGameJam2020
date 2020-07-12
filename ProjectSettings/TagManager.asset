@@ -9,6 +9,7 @@ TagManager:
   - BlueSlider
   - OrangeSlider
   - GreenSlider
+  - ShopManager
   layers:
   - Default
   - TransparentFX

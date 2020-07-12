@@ -52,18 +52,18 @@ public class ViewportHandler : MonoBehaviour
 
   private void instantiateSimpleTask(List<ButtonPressed> buttons)
   {
-    GameObject panel = Instantiate(simpleTaskPrefab) as GameObject;
+    GameObject panel = Instantiate(simpleTaskPrefab, content, false) as GameObject;
     TaskPanelController controller = panel.GetComponent<TaskPanelController>();
     controller.setButtons(buttons);
-    panel.transform.SetParent(content, false);
+    //panel.transform.SetParent(content, false);
   }
 
   private void instantiateSliderTask(Slider slider, int powerlevel)
   {
-    GameObject panel = Instantiate(sliderTaskPrefab) as GameObject;
+    GameObject panel = Instantiate(sliderTaskPrefab, content, false) as GameObject;
     PowerTaskPanelController controller = panel.GetComponent<PowerTaskPanelController>();
     controller.setPanel(slider, powerlevel);
-    panel.transform.SetParent(content, false);
+    //panel.transform.SetParent(content, false);
   }
 
   private void clearChildren()
