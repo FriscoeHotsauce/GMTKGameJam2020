@@ -42,7 +42,7 @@ public class SequenceManager : MonoBehaviour
   {
     taskGenerator = new TaskGenerator();
     buttonHistory = new List<ButtonHistory>();
-    taskList = taskGenerator.generateStartingTasks();
+    setStartingTasks();
     requiresValidation = false;
     updateTaskList();
   }
@@ -136,6 +136,12 @@ public class SequenceManager : MonoBehaviour
       buttonHistory.RemoveAt(maxHistorySize);
       //Debug.Log(dequeued.ToString() + " was bumped from the queue");
     }
+  }
+
+  public void setStartingTasks()
+  {
+    taskList = taskGenerator.generateStartingTasks();
+    updateTaskList();
   }
 
   private void updateTaskList()

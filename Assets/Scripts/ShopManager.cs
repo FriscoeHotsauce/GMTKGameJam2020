@@ -111,7 +111,7 @@ public class ShopManager : MonoBehaviour
     int buyChance = rando.Next(100);
     if (buyChance < 20)
     {
-      currentGold += currentShopItems[0].getGoldValue();
+      currentGold += currentShopItems[0].getGoldValue() * 100; //big number make me feel good
       removeItemFromShop();
       updateGoldText();
       return true;
@@ -172,7 +172,15 @@ public class ShopManager : MonoBehaviour
   public void resetGold()
   {
     currentGold = 0;
+    updateGoldText();
   }
+
+  public void resetCustomers()
+  {
+    currentCustomers.Clear();
+    renderCustomers();
+  }
+
 }
 
 public class InventoryItem

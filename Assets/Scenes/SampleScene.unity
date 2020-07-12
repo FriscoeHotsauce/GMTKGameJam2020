@@ -2135,7 +2135,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -58.30005, y: -345}
+  m_AnchoredPosition: {x: -58.299805, y: -345}
   m_SizeDelta: {x: -1263.7, y: -785}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &543690834
@@ -3885,7 +3885,7 @@ MonoBehaviour:
   nextPhase: 0
   currentPhaseText: {fileID: 37574140}
   timeRemainingText: {fileID: 1146568721}
-  playAgainButton: {fileID: 1246856439}
+  playAgainButton: {fileID: 1246856437}
 --- !u!224 &1078258938 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224842743398134454, guid: 4b27963648097bc4c8e3d037f79b582b,
@@ -4820,7 +4820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5857207}
-  m_AnchoredPosition: {x: 444.7, y: -37.994}
+  m_AnchoredPosition: {x: 444.7, y: -37.993996}
   m_SizeDelta: {x: 305.8, y: 383.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1335430049
@@ -5249,7 +5249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 240, y: 87.100006}
+  m_AnchoredPosition: {x: 240, y: 87.1001}
   m_SizeDelta: {x: -667.2, y: -550.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1585489311
@@ -5337,9 +5337,9 @@ MonoBehaviour:
   shopInventory: {fileID: 420338077}
   customerLobby: {fileID: 1031680426}
   maxCustomers: 12
-  customerInterval: 5.25
+  customerInterval: 4.75
   nextCustomerAt: 0
-  buyInterval: 2
+  buyInterval: 1.8
   nextBuyAt: 0
   currentGold: 0
   canPurchase: 0

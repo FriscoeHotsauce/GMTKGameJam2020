@@ -31,7 +31,7 @@ public class PhaseManager : MonoBehaviour
   public Text currentPhaseText;
   public Text timeRemainingText;
 
-  public Button playAgainButton;
+  public GameObject playAgainButton;
 
   private SequenceManager sequenceManager;
   private ShopManager shopManager;
@@ -185,16 +185,19 @@ public class PhaseManager : MonoBehaviour
 
   public void enablePlayAgainButton()
   {
-    playAgainButton.enabled = true;
+    playAgainButton.SetActive(true);
   }
 
   public void resetAndPlayAgain()
   {
     currentPhase = Phase.Preparation;
+    nextPhase = Phase.One;
     sequenceManager.clearAllTasks();
+    sequenceManager.setStartingTasks();
     shopManager.clearAllItemsFromShop();
-    shopManager.clearCustomers();
+    shopManager.resetCustomers();
     shopManager.resetGold();
-    playAgainButton.enabled = false;
+    shopManager.pausePurchases();
+    playAgainButton.SetActive(false);
   }
 }
