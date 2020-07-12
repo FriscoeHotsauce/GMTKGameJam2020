@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+  Manages input
+*/
 public class GameDriver : MonoBehaviour
 {
   public Button purpleCircleButton;
@@ -15,40 +18,11 @@ public class GameDriver : MonoBehaviour
   public Button orangeSquareButton;
   public Button greenSquareButton;
 
-  public Slider purpleSlider;
-  public Slider blueSlider;
-  public Slider orangeSlider;
-  public Slider greenSlider;
-
-  public Toggle purpleToggle;
-  public Toggle blueToggle;
-  public Toggle orangeToggle;
-  public Toggle greenToggle;
-
-  public float newTaskInterval = 3.0f;
-  public float currentTime;
-  public SequenceManager sequenceManager;
-  public bool requiresValidationPass;
-
-  void Start()
-  {
-    currentTime = 0.0f;
-    sequenceManager = GameObject.FindGameObjectWithTag("SequenceManager").GetComponent<SequenceManager>();
-    requiresValidationPass = false;
-  }
-
   void Update()
   {
     getInput();
-    currentTime += Time.deltaTime;
-    if (currentTime > newTaskInterval)
-    {
-      //generate new task
-      sequenceManager.generateNewTask();
-      currentTime = 0.0f;
-    }
-    sequenceManager.evaluteAllTasks();
   }
+
 
   public void getInput()
   {

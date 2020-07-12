@@ -2,18 +2,28 @@
 
 public class ButtonSequenceTask : Task
 {
-  private List<SequenceManager.ButtonPressed> buttonSequence;
+  private List<ButtonPressed> buttonSequence;
   private float createdAt;
+  private string id;
 
-  public ButtonSequenceTask(List<SequenceManager.ButtonPressed> buttonSequence, float createdAt)
+  public ButtonSequenceTask(List<ButtonPressed> buttonSequence, float createdAt)
   {
     this.buttonSequence = buttonSequence;
     this.createdAt = createdAt;
+    this.id = System.Guid.NewGuid().ToString();
   }
 
   public bool evaluate(List<ButtonHistory> buttonHistory, float time)
   {
-    return true;
+    int completed = 0;
+    for (int i = 0; i < buttonSequence.Count; i++)
+    {
+      if (buttonSequence[i] == buttonHistory[i].getButtonPressed())
+      {
+        completed += 1;
+      }
+    }
+    return completed == buttonSequence.Count;
   }
 
   public int score()
@@ -24,5 +34,14 @@ public class ButtonSequenceTask : Task
   public float timeGenerated()
   {
     return createdAt;
+  }
+
+  public string getId()
+  {
+    return id;
+  }
+  public List<ButtonPressed> getButtonSequence()
+  {
+    return buttonSequence;
   }
 }
