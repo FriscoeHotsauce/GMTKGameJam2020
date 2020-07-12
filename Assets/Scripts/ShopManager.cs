@@ -42,7 +42,7 @@ public class ShopManager : MonoBehaviour
 
   void Update()
   {
-    if (nextCustomerAt < Time.time && currentCustomers.Count <= maxCustomers)
+    if (nextCustomerAt < Time.time && currentCustomers.Count < maxCustomers && canPurchase)
     {
       addCustomer();
       nextCustomerAt = Time.time + customerInterval;
@@ -167,6 +167,11 @@ public class ShopManager : MonoBehaviour
   private void updateGoldText()
   {
     goldText.text = currentGold.ToString();
+  }
+
+  public void resetGold()
+  {
+    currentGold = 0;
   }
 }
 

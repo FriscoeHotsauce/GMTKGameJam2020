@@ -31,6 +31,8 @@ public class PhaseManager : MonoBehaviour
   public Text currentPhaseText;
   public Text timeRemainingText;
 
+  public Button playAgainButton;
+
   private SequenceManager sequenceManager;
   private ShopManager shopManager;
 
@@ -123,6 +125,7 @@ public class PhaseManager : MonoBehaviour
       if (currentPhase == Phase.Three)
       {
         currentPhase = Phase.End;
+        enablePlayAgainButton();
       }
       else
       {
@@ -178,5 +181,20 @@ public class PhaseManager : MonoBehaviour
       timeRemainingText.text = (String.Format("{0:.00}", Math.Round(phaseEndsAt - Time.time, 2)));
     }
 
+  }
+
+  public void enablePlayAgainButton()
+  {
+    playAgainButton.enabled = true;
+  }
+
+  public void resetAndPlayAgain()
+  {
+    currentPhase = Phase.Preparation;
+    sequenceManager.clearAllTasks();
+    shopManager.clearAllItemsFromShop();
+    shopManager.clearCustomers();
+    shopManager.resetGold();
+    playAgainButton.enabled = false;
   }
 }
