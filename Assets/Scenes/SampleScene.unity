@@ -2763,6 +2763,10 @@ MonoBehaviour:
   requiresValidation: 0
   viewportHandler: {fileID: 935129281}
   shopManager: {fileID: 1585489313}
+  purpleSlider: {fileID: 1234601416}
+  blueSlider: {fileID: 343782050}
+  orangeSlider: {fileID: 1971343918}
+  greenSlider: {fileID: 1753546125}
 --- !u!4 &745669050
 Transform:
   m_ObjectHideFlags: 0

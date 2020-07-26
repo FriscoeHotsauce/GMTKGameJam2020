@@ -19,7 +19,8 @@ public class SliderTask : Task
 
   public bool evaluate(List<ButtonHistory> buttonHistory, float time)
   {
-    return (buttonHistory[0].getButtonPressed() == buttonToPress && buttonHistory[0].getTime() > createdAt && powerLevelCorrect());
+    // return (buttonHistory[0].getButtonPressed() == buttonToPress && buttonHistory[0].getTime() > createdAt && powerLevelCorrect());
+    return (powerLevelCorrect());
   }
 
   public int score()

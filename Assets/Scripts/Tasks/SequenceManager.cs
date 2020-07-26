@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /**
   Keep track of which buttons were pressed, the current list of tasks
@@ -36,6 +37,11 @@ public class SequenceManager : MonoBehaviour
   public TaskGenerator taskGenerator;
   public ViewportHandler viewportHandler;
   public ShopManager shopManager;
+
+  public UnityEngine.UI.Slider purpleSlider;
+  public UnityEngine.UI.Slider blueSlider;
+  public UnityEngine.UI.Slider orangeSlider;
+  public UnityEngine.UI.Slider greenSlider;
 
   // Start is called before the first frame update
   void Start()
@@ -138,6 +144,19 @@ public class SequenceManager : MonoBehaviour
     }
   }
 
+  public bool isCurrentTaskSlider()
+  {
+    return (taskList != null && taskList.Count > 0 && taskList[0] is SliderTask);
+  }
+
+  public void setSliderValue(UnityEngine.UI.Slider slider, float value)
+  {
+    if (value <= slider.maxValue && value >= 0)
+    {
+      slider.value = value;
+    }
+  }
+
   public void setStartingTasks()
   {
     taskList = taskGenerator.generateStartingTasks();
@@ -151,50 +170,106 @@ public class SequenceManager : MonoBehaviour
 
   public void addPurpleCircleButtonPress()
   {
-    addButtonToHistory(ButtonPressed.purpleCircle);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(purpleSlider, (purpleSlider.value - 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.purpleCircle);
+    }
     requiresValidation = true;
   }
 
   public void addBlueCircleButtonPress()
   {
-    addButtonToHistory(ButtonPressed.blueCircle);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(blueSlider, (blueSlider.value - 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.blueCircle);
+    }
     requiresValidation = true;
 
   }
 
   public void addOrangeCircleButtonPress()
   {
-    addButtonToHistory(ButtonPressed.orangeCircle);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(orangeSlider, (orangeSlider.value - 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.orangeCircle);
+    }
     requiresValidation = true;
   }
 
   public void addGreenCircleButtonPress()
   {
-    addButtonToHistory(ButtonPressed.greenCircle);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(greenSlider, (greenSlider.value - 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.greenCircle);
+    }
     requiresValidation = true;
   }
 
   public void addPurpleSquareButtonPress()
   {
-    addButtonToHistory(ButtonPressed.purpleSquare);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(purpleSlider, (purpleSlider.value + 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.purpleSquare);
+    }
     requiresValidation = true;
   }
 
   public void addBlueSquareButtonPress()
   {
-    addButtonToHistory(ButtonPressed.blueSquare);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(blueSlider, (blueSlider.value + 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.blueSquare);
+    }
     requiresValidation = true;
   }
 
   public void addOrangeSquareButtonPress()
   {
-    addButtonToHistory(ButtonPressed.orangeSquare);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(orangeSlider, (orangeSlider.value + 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.orangeSquare);
+    }
     requiresValidation = true;
   }
 
   public void addGreenSquareButtonPress()
   {
-    addButtonToHistory(ButtonPressed.greenSquare);
+    if (isCurrentTaskSlider())
+    {
+      setSliderValue(greenSlider, (greenSlider.value + 1.0f));
+    }
+    else
+    {
+      addButtonToHistory(ButtonPressed.greenSquare);
+    }
     requiresValidation = true;
   }
 
